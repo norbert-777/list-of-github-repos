@@ -1,0 +1,4 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+yarn test --changedSince $(git show -s --format="%H" origin/main)

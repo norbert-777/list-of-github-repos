@@ -1,3 +1,10 @@
+1. TODO README
+2. Lint stage
+3. Unit tests
+4. e2e tests
+
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
