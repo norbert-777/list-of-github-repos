@@ -27321,7 +27321,7 @@ export type GetRepositoriesQuery = {
       | { __typename?: 'MarketplaceListing' }
       | { __typename?: 'Organization' }
       | { __typename?: 'PullRequest' }
-      | { __typename?: 'Repository'; forkCount: number; id: string; name: string; stargazerCount: number; url: any }
+      | { __typename: 'Repository'; forkCount: number; id: string; name: string; stargazerCount: number; url: any }
       | { __typename?: 'User' }
       | null
     > | null;
@@ -27395,6 +27395,7 @@ export const GetRepositoriesDocument = {
                         selectionSet: {
                           kind: 'SelectionSet',
                           selections: [
+                            { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
                             { kind: 'Field', name: { kind: 'Name', value: 'forkCount' } },
                             { kind: 'Field', name: { kind: 'Name', value: 'id' } },
                             { kind: 'Field', name: { kind: 'Name', value: 'name' } },

@@ -1,6 +1,6 @@
 import { SEARCH_QUERY } from '@domains/repositories/graphql/searchQuery.graphql';
+import { createRepositoriesPathname } from '@domains/repositories/helpers/createRepositoriesPathname';
 import { decodeSearchTerm } from '@domains/repositories/helpers/decodeSearchTerm';
-import { encodeSearchTerm } from '@domains/repositories/helpers/encodeSearchTerm';
 import type { RepositoriesPageProperties } from '@domains/repositories/RepositoriesPage';
 import { getPositiveIntegerQueryParameter } from '@domains/shared/helpers/getPositiveIntegerQueryParameter';
 import { getStringQueryParameter } from '@domains/shared/helpers/getStringQueryParameter';
@@ -58,7 +58,7 @@ export const createGetStaticProperties: (defaultSearchTerm?: string) => GetStati
     if (lastPage > 0 && parsedPage > lastPage) {
       return {
         redirect: {
-          destination: `/${encodeSearchTerm(searchTerm)}/${lastPage}`,
+          destination: createRepositoriesPathname({ searchTerm, page: lastPage, shouldEncodeSearchTerm: true }),
           permanent: false,
         },
       };
@@ -66,7 +66,7 @@ export const createGetStaticProperties: (defaultSearchTerm?: string) => GetStati
       // No result to show - redirect to the main search page
       return {
         redirect: {
-          destination: `/${encodeSearchTerm(searchTerm)}`,
+          destination: createRepositoriesPathname({ searchTerm, shouldEncodeSearchTerm: true }),
           permanent: false,
         },
       };

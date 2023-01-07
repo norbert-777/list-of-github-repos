@@ -13,7 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel-plugin for production.
  */
 const documents = {
-  '\n  query GetRepositories($query: String!, $after: String, $first: Int) {\n    search(query: $query, after: $after, first: $first, type: REPOSITORY) {\n      nodes {\n        ... on Repository {\n          forkCount\n          id\n          name\n          stargazerCount\n          url\n        }\n      }\n      repositoryCount\n    }\n  }\n':
+  '\n  query GetRepositories($query: String!, $after: String, $first: Int) {\n    search(query: $query, after: $after, first: $first, type: REPOSITORY) {\n      nodes {\n        ... on Repository {\n          __typename\n          forkCount\n          id\n          name\n          stargazerCount\n          url\n        }\n      }\n      repositoryCount\n    }\n  }\n':
     types.GetRepositoriesDocument,
 };
 
@@ -35,8 +35,8 @@ export function graphql(source: string): unknown;
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: '\n  query GetRepositories($query: String!, $after: String, $first: Int) {\n    search(query: $query, after: $after, first: $first, type: REPOSITORY) {\n      nodes {\n        ... on Repository {\n          forkCount\n          id\n          name\n          stargazerCount\n          url\n        }\n      }\n      repositoryCount\n    }\n  }\n',
-): typeof documents['\n  query GetRepositories($query: String!, $after: String, $first: Int) {\n    search(query: $query, after: $after, first: $first, type: REPOSITORY) {\n      nodes {\n        ... on Repository {\n          forkCount\n          id\n          name\n          stargazerCount\n          url\n        }\n      }\n      repositoryCount\n    }\n  }\n'];
+  source: '\n  query GetRepositories($query: String!, $after: String, $first: Int) {\n    search(query: $query, after: $after, first: $first, type: REPOSITORY) {\n      nodes {\n        ... on Repository {\n          __typename\n          forkCount\n          id\n          name\n          stargazerCount\n          url\n        }\n      }\n      repositoryCount\n    }\n  }\n',
+): typeof documents['\n  query GetRepositories($query: String!, $after: String, $first: Int) {\n    search(query: $query, after: $after, first: $first, type: REPOSITORY) {\n      nodes {\n        ... on Repository {\n          __typename\n          forkCount\n          id\n          name\n          stargazerCount\n          url\n        }\n      }\n      repositoryCount\n    }\n  }\n'];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

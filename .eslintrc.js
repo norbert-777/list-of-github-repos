@@ -24,6 +24,7 @@ module.exports = {
       ],
       rules: {
         quotes: ['error', 'single', { avoidEscape: true }],
+        'no-restricted-imports': ['error', { patterns: ['@mui/*/*/*'] }], // https://mui.com/material-ui/guides/minimizing-bundle-size/#option-one-use-path-imports
         'simple-import-sort/imports': 'error',
         'simple-import-sort/exports': 'error',
         '@typescript-eslint/consistent-type-imports': 'error', // https://typescript-eslint.io/rules/consistent-type-imports/

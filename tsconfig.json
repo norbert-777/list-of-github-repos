@@ -16,7 +16,8 @@
       "@config/*": ["./config/*"],
       "@domains/*": ["./domains/*"],
       "@graphql/*": ["./generated/graphql/*"],
-      "@pages/*": ["./pages/*"]
+      "@pages/*": ["./pages/*"],
+      "@styles/*": ["./styles/*"]
     },
     "resolveJsonModule": true,
     "strictNullChecks": true,

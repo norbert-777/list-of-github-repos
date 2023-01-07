@@ -5,6 +5,7 @@ export const SEARCH_QUERY = graphql(`
     search(query: $query, after: $after, first: $first, type: REPOSITORY) {
       nodes {
         ... on Repository {
+          __typename
           forkCount
           id
           name

@@ -1,10 +1,14 @@
 1. In the project is used ISR, to let create static pages and to avoid GitHub private token exposure.
-2.
-3.
-4. TODO README
-5. Lint stage
-6. Unit tests
-7. e2e tests
+2. Material MUI implementation based on official example: https://github.com/mui/material-ui/tree/HEAD/examples/nextjs-with-typescript
+3. Goal: play with MUI library design library and check the possibilities
+4. MUI is quite well testes, so there is no reason to duplicate unit tests
+5.
+6.
+7. TODO README
+8. Lint stage
+9. Unit tests
+10.
+11. e2e tests
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
