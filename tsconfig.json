@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -8,17 +9,21 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "module": "esnext",
+    "module": "ESNext",
     "moduleResolution": "node",
+    "noImplicitAny": true,
     "paths": {
-      "@pages/*": ["./pages/*"],
-      "@domains/*": ["./domains/*"]
+      "@config/*": ["./config/*"],
+      "@domains/*": ["./domains/*"],
+      "@graphql/*": ["./generated/graphql/*"],
+      "@pages/*": ["./pages/*"]
     },
     "resolveJsonModule": true,
+    "strictNullChecks": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "bin"]
 }

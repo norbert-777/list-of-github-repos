@@ -1,9 +1,10 @@
-1. TODO README
-2. Lint stage
-3. Unit tests
-4. e2e tests
-
-
+1. In the project is used ISR, to let create static pages and to avoid GitHub private token exposure.
+2.
+3.
+4. TODO README
+5. Lint stage
+6. Unit tests
+7. e2e tests
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
