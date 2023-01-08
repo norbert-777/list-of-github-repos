@@ -6,16 +6,23 @@
  */
 const process = require('node:process');
 
-const { GITHUB_GRAPHQL_TOKEN, GITHUB_GRAPHQL_URL } = process.env;
+const { GITHUB_GRAPHQL_TOKEN, GITHUB_GRAPHQL_URL, NODE_ENV } = process.env;
 
 const getMissingEnvironmentVariableMessage = (variableName) =>
   `Please provide "${variableName}" env variable to continue!\nProbably you need to update ".env.*" file`;
 
-if (!GITHUB_GRAPHQL_URL) {
-  throw new Error(getMissingEnvironmentVariableMessage('GITHUB_GRAPHQL_URL'));
-}
-if (!GITHUB_GRAPHQL_TOKEN) {
-  throw new Error(getMissingEnvironmentVariableMessage('GITHUB_GRAPHQL_TOKEN'));
+const checkRequiredEnvironmentVariables = () => {
+  if (!GITHUB_GRAPHQL_URL) {
+    throw new Error(getMissingEnvironmentVariableMessage('GITHUB_GRAPHQL_URL'));
+  }
+  if (!GITHUB_GRAPHQL_TOKEN) {
+    throw new Error(getMissingEnvironmentVariableMessage('GITHUB_GRAPHQL_TOKEN'));
+  }
+};
+
+if (NODE_ENV !== 'test') {
+  // Do not execute checking in test env (e.g. in unit tests)
+  checkRequiredEnvironmentVariables();
 }
 
 module.exports = { GITHUB_GRAPHQL_TOKEN, GITHUB_GRAPHQL_URL };

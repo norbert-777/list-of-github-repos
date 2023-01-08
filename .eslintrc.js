@@ -28,6 +28,7 @@ module.exports = {
         'simple-import-sort/imports': 'error',
         'simple-import-sort/exports': 'error',
         '@typescript-eslint/consistent-type-imports': 'error', // https://typescript-eslint.io/rules/consistent-type-imports/
+        '@typescript-eslint/unbound-method': 'off', // Disabled because of the poorly defined Next.js types (falsy positives)
         'unicorn/filename-case': [
           'error',
           { cases: { camelCase: true, pascalCase: true }, ignore: [/^next-env\.d\.ts$/] },
@@ -43,6 +44,12 @@ module.exports = {
       },
       rules: {
         'unicorn/no-process-exit': 'off',
+      },
+    },
+    {
+      files: ['**/*.test.{ts,tsx}'],
+      rules: {
+        '@typescript-eslint/no-unsafe-call': 'off',
       },
     },
   ],

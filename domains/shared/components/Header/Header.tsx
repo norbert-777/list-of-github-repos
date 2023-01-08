@@ -1,12 +1,18 @@
-import AppBar from '@mui/material/AppBar';
+import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
+import NextLink from 'next/link';
 import type { FC } from 'react';
-import React from 'react';
+
+import { StyledAppBar } from './Header.theme';
 
 export const Header: FC = () => (
-  <AppBar position="static">
-    <Typography variant="h6" component="h1" sx={{ px: 2, py: 0.5 }}>
-      List of GitHub repositories
+  <StyledAppBar position="static">
+    <Typography variant="h6" component="h1">
+      <NextLink href="/" legacyBehavior passHref>
+        <Link color="inherit" underline="none">
+          List of GitHub repositories
+        </Link>
+      </NextLink>
     </Typography>
-  </AppBar>
+  </StyledAppBar>
 );

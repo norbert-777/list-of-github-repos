@@ -1,3 +1,4 @@
+import { MainLayout } from '@domains/shared/components/MainLayout/MainLayout';
 import type { EmotionCache } from '@emotion/react';
 import { CacheProvider } from '@emotion/react';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -25,7 +26,9 @@ const Application = ({ Component, emotionCache = clientSideEmotionCache, pagePro
         <ThemeProvider theme={DEFAULT_THEME}>
           {/* Base reset styles - @link https://mui.com/material-ui/react-css-baseline/ */}
           <CssBaseline />
-          <Component {...pageProps} />
+          <MainLayout>
+            <Component {...pageProps} />
+          </MainLayout>
         </ThemeProvider>
       </CacheProvider>
     </>

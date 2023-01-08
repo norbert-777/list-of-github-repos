@@ -19,73 +19,73 @@ const MAX_PAGE_NUMBER = 1000 / DEFAULT_PER_PAGE_ITEMS;
 /**
  * Function responsible for returning the data required to render the page
  */
-export const createGetStaticProperties: (defaultSearchTerm?: string) => GetStaticProps<RepositoriesPageProperties> =
-  (defaultSearchTerm) =>
-  async ({ params: { searchTerm: rawSearchTerm, page: rawPage } = {} }) => {
-    // Pre-validate query params
-    const parsedSearchTerm = getStringQueryParameter(rawSearchTerm) ?? defaultSearchTerm; // use the fallback when available, e.g. react on the index page
-    let parsedPage = getPositiveIntegerQueryParameter(rawPage);
+export const getStaticProps: GetStaticProps<RepositoriesPageProperties> = async ({
+  params: { searchTerm: rawSearchTerm, page: rawPage } = {},
+}) => {
+  // Pre-validate query params
+  const parsedSearchTerm = getStringQueryParameter(rawSearchTerm); // use the fallback when available, e.g. react on the index page
+  let parsedPage = getPositiveIntegerQueryParameter(rawPage);
 
-    // If offset value is defined but invalid, return not found page
-    if (!!rawPage && parsedPage === null) {
-      return { notFound: true };
-    }
-    let searchTerm: string;
-    parsedPage = parsedPage ?? 1; // Set the default value for the pagination if not defined
+  // If offset value is defined but invalid, return not found page
+  if (!!rawPage && parsedPage === null) {
+    return { notFound: true };
+  }
+  let searchTerm: string;
+  parsedPage = parsedPage ?? 1; // Set the default value for the pagination if not defined
 
-    if (parsedSearchTerm) {
-      // parsedSearchTerm is encoded to let it use as the part of the URL
-      searchTerm = decodeSearchTerm(parsedSearchTerm);
-    } else {
-      // otherwise return not found page
-      return { notFound: true };
-    }
+  if (parsedSearchTerm?.length) {
+    // parsedSearchTerm is encoded to let it use as the part of the URL
+    searchTerm = decodeSearchTerm(parsedSearchTerm);
+  } else {
+    // otherwise return not found page
+    return { notFound: true };
+  }
 
-    // Calculate the current page offset
-    const offset = (parsedPage - 1) * DEFAULT_PER_PAGE_ITEMS;
-    const base64OffsetAsCursor = Buffer.from(`cursor:${offset}`).toString('base64');
+  // Calculate the current page offset
+  const offset = (parsedPage - 1) * DEFAULT_PER_PAGE_ITEMS;
+  const base64OffsetAsCursor = Buffer.from(`cursor:${offset}`).toString('base64');
 
-    // Execute the query and handle errors
-    const data = handleGraphResponse(
-      await githubGraphQlClient
-        .query(SEARCH_QUERY, { after: base64OffsetAsCursor, first: DEFAULT_PER_PAGE_ITEMS, query: searchTerm })
-        .toPromise(),
-    );
+  // Execute the query and handle errors
+  const data = handleGraphResponse(
+    await githubGraphQlClient
+      .query(SEARCH_QUERY, { after: base64OffsetAsCursor, first: DEFAULT_PER_PAGE_ITEMS, query: searchTerm })
+      .toPromise(),
+  );
 
-    // Pagination - if the page is out of available boundary, redirect to the last page
-    const { search } = data;
-    const lastPage = Math.min(MAX_PAGE_NUMBER, Math.ceil(search.repositoryCount / DEFAULT_PER_PAGE_ITEMS));
-    if (lastPage > 0 && parsedPage > lastPage) {
-      return {
-        redirect: {
-          destination: createRepositoriesPathname({ searchTerm, page: lastPage, shouldEncodeSearchTerm: true }),
-          permanent: false,
-        },
-      };
-    } else if (lastPage === 0 && !!rawPage) {
-      // No result to show - redirect to the main search page
-      return {
-        redirect: {
-          destination: createRepositoriesPathname({ searchTerm, shouldEncodeSearchTerm: true }),
-          permanent: false,
-        },
-      };
-    }
-
+  // Pagination - if the page is out of available boundary, redirect to the last page
+  const { search } = data;
+  const lastPage = Math.min(MAX_PAGE_NUMBER, Math.ceil(search.repositoryCount / DEFAULT_PER_PAGE_ITEMS));
+  if (lastPage > 0 && parsedPage > lastPage) {
     return {
-      props: {
-        pagination: {
-          current: parsedPage,
-          last: lastPage,
-          perPage: DEFAULT_PER_PAGE_ITEMS,
-          offset,
-        },
-        searchTerm,
-        searchResults: search,
+      redirect: {
+        destination: createRepositoriesPathname({ searchTerm, page: lastPage, shouldEncodeSearchTerm: true }),
+        permanent: false,
       },
-      revalidate: REGENERATE_THE_PAGE_AT_MOST_IN_SECONDS,
     };
+  } else if (lastPage === 0 && !!rawPage) {
+    // No result to show - redirect to the main search page
+    return {
+      redirect: {
+        destination: createRepositoriesPathname({ searchTerm, shouldEncodeSearchTerm: true }),
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      pagination: {
+        current: parsedPage,
+        last: lastPage,
+        perPage: DEFAULT_PER_PAGE_ITEMS,
+        offset,
+      },
+      searchTerm,
+      searchResults: search,
+    },
+    revalidate: REGENERATE_THE_PAGE_AT_MOST_IN_SECONDS,
   };
+};
 
 /**
  * Function required to let Next.js know, that no page should be generated during the build for ISR process

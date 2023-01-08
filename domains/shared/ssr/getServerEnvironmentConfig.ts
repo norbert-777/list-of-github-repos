@@ -1,6 +1,6 @@
 import getConfig from 'next/config';
 
-interface ServerRuntimeConfig {
+export interface ServerRuntimeConfig {
   githubToken: string;
   githubUrl: string;
 }

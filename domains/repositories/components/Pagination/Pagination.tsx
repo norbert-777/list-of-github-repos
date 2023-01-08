@@ -10,7 +10,9 @@ import Link from 'next/link';
 
 import { PaginationSkeleton, Wrapper } from './Pagination.theme';
 
-export const Pagination = (properties: PaginationProps & { searchTerm: string }) => {
+export const Pagination = (
+  properties: Pick<PaginationProps, 'count' | 'defaultPage' | 'onChange'> & { searchTerm: string },
+) => {
   const { searchTerm, ...propertiesToPass } = properties;
   const theme = useTheme();
   const isSmBreakpoint = useMediaQuery(theme.breakpoints.up('sm'));
