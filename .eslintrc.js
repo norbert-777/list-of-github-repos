@@ -52,5 +52,11 @@ module.exports = {
         '@typescript-eslint/no-unsafe-call': 'off',
       },
     },
+    {
+      files: ['cypress/**/*.cy.{ts,tsx}'],
+      parserOptions: {
+        project: './cypress/tsconfig.json',
+      },
+    },
   ],
 };
