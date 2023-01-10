@@ -1,0 +1,5 @@
+.husky
+.idea
+.next
+cypress
+node_modules

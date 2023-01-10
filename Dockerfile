@@ -1,4 +1,5 @@
-FROM node:18.12.1
+# syntax=docker/dockerfile:1
+FROM node:18.12.1-alpine
 
 # Copy application
 RUN mkdir /app/
@@ -6,7 +7,7 @@ WORKDIR /app/
 COPY . .
 
 # Install dependencies
-RUN yarn --production --frozen-lockfile --no-bin-links
+RUN yarn --production --frozen-lockfile
 
 # Run build
 RUN yarn build
