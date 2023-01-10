@@ -1,15 +1,17 @@
 # GitHub Repositories Search using GraphQL with NextJS demo
 
+Playground of fetching GitHub Repositories search results using GraphQL with NextJS demo stored in monorepo.
+
 ## Demo
 
-Demo is available thanks to Vercel. It was created during when the projected started and it's available is not guaranteed
+Demo is available thanks to Vercel. It was created during when the projected started, and it's available is not guaranteed
 to the GitHub & Vercel personal project limitations.
 
 To see the demo visit:
 
-- TBA
+- [https://list-of-github-repos.vercel.app/](https://list-of-github-repos.vercel.app/)
 
-## Preconditions
+## Pre-requirements
 
 To start the project locally:
 
@@ -69,10 +71,11 @@ Other:
 
 ## Getting Started - running the app locally in development mode
 
-1. Make sure you have `yarn` installed globally. [How to?](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable)
-2. Install dependencies `yarn`.
-3. Start the dev version `yarn dev`.
-4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. To run the project there is required Node.js in version 18.12.1+.
+2. Make sure you have `yarn` installed globally. [How to?](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable)
+3. Install dependencies `yarn`.
+4. Start the dev version `yarn dev`.
+5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ### Available scripts
 
