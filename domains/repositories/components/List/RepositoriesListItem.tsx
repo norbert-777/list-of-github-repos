@@ -18,7 +18,7 @@ export const RepositoriesListItem: FC<{ forkCount: number; name: string; stargaz
       <Card variant="outlined">
         <Grid container columnSpacing={2} rowSpacing={1} padding={2}>
           <Grid item xs={12} sm={9}>
-            <Link href={url} target="_blank" rel="noopener" underline="hover">
+            <Link data-cy="repositories.item.link" href={url} target="_blank" rel="noopener" underline="hover">
               {name} <StyledOpenInNewIcon />
             </Link>
           </Grid>
