@@ -6,7 +6,7 @@
  */
 const process = require('node:process');
 
-const { GITHUB_GRAPHQL_TOKEN, GITHUB_GRAPHQL_URL, NODE_ENV } = process.env;
+const { GITHUB_GRAPHQL_TOKEN, GITHUB_GRAPHQL_URL, NODE_ENV, SKIP_ENV_CHECK } = process.env;
 
 const getMissingEnvironmentVariableMessage = (variableName) =>
   `Please provide "${variableName}" env variable to continue!\nProbably you need to update ".env.*" file`;
@@ -20,8 +20,8 @@ const checkRequiredEnvironmentVariables = () => {
   }
 };
 
-if (NODE_ENV !== 'test') {
-  // Do not execute checking in test env (e.g. in unit tests)
+if (NODE_ENV !== 'test' && SKIP_ENV_CHECK !== '1') {
+  // Do not execute checking in test env (e.g. in unit tests) or during the build process
   checkRequiredEnvironmentVariables();
 }
 

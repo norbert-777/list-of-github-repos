@@ -7,13 +7,13 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "SKIP_ENV_CHECK=1 next build",
     "e2e": "cypress open --e2e",
     "e2e:ci": "cypress run",
     "start": "next start",
     "test": "jest",
     "test:ci": "jest --ci",
-    "ts:lint": "next lint --fix",
+    "ts:lint": "SKIP_ENV_CHECK=1 next lint --fix",
     "ts:types-check": "tsc --noEmit && tsc -p bin/tsconfig.json --noEmit && tsc -p cypress/tsconfig.json --noEmit",
     "prepare": "husky install",
     "codegen": "graphql-codegen"
